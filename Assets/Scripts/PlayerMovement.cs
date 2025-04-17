@@ -34,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
 
 		trail.transform.rotation = Quaternion.LookRotation( transform.forward, transform.position - (Vector3)playerRigidBody.velocity);
 
-		var _angle = Mathf.Abs(Vector2.SignedAngle(-transform.up, transform.position - (Vector3)playerRigidBody.velocity));
+		var _angle = Mathf.Abs(Vector2.SignedAngle(transform.up, (Vector3)playerRigidBody.velocity));
 
 		if (_angle > angleTreshhold)
 		{
@@ -46,11 +46,13 @@ public class PlayerMovement : MonoBehaviour
 			var _em = trailParticle.emission;
 			_em.rateOverTime = 0;
 		}
+		Debug.DrawRay(transform.position, transform.up, Color.magenta, 0.5f);
+		Debug.DrawRay(transform.position, Vector3.Normalize((Vector3)playerRigidBody.velocity), Color.yellow, 0.5f);
 	}
-
-	private void OnCollisionEnter(Collision collision)
+	private void OnCollisionEnter2D(Collision2D collision)
 	{
-		playerRigidBody.velocity = new Vector2(0,0);
+		Debug.Log("coll");
+		playerRigidBody.velocity = new Vector2(0, 0);
 
 		playerRigidBody.AddForce(forceOnContact * collision.GetContact(0).normal, ForceMode2D.Impulse);
 	}
