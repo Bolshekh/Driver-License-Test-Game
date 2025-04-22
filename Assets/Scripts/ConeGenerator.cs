@@ -7,6 +7,7 @@ public class ConeGenerator : MonoBehaviour
 	[SerializeField] LineRenderer[] lines;
 	[SerializeField] GameObject obstacles;
 	[SerializeField] GameObject cone;
+	[SerializeField] float coneDensity = 0.5f;
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -24,14 +25,14 @@ public class ConeGenerator : MonoBehaviour
 			line.GetPositions(points);
 			for (int i = 0; i < points.Length; i++)
 			{
-				if (i + 1 < points.Length && Vector3.Distance(points[i], points[i + 1]) > 0.5f)
+				if (i + 1 < points.Length)
 				{
-					Instantiate(SpawnObject, Vector3.Lerp(points[i], points[i + 1], 0.5f), Quaternion.identity, Parent.transform);
-					Instantiate(SpawnObject, points[i], Quaternion.identity, Parent.transform);
-				}
-				else
-				{
-					Instantiate(SpawnObject, points[i], Quaternion.identity, Parent.transform);
+					Vector3 currentPos = points[i];
+					while (currentPos != points[i + 1])
+					{
+						Instantiate(SpawnObject, currentPos, Quaternion.identity, Parent.transform);
+						currentPos = Vector3.MoveTowards(currentPos, points[i + 1], coneDensity);
+					}
 				}
 			}
 		}

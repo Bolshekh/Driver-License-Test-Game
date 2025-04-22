@@ -1,0 +1,74 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &9084902715954745918
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1112024163183271498}
+  - component: {fileID: 8218495583854210413}
+  - component: {fileID: 6704711490989063350}
+  m_Layer: 0
+  m_Name: Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1112024163183271498
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9084902715954745918}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8218495583854210413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9084902715954745918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2ed2df153e43ab449ab9d1065c1b0fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lines:
+  - {fileID: 0}
+  - {fileID: 0}
+  obstacles: {fileID: 0}
+  cone: {fileID: 3368441962675788422, guid: 1a088b6cddbda634b8244751d6d80c58, type: 3}
+  coneDensity: 2
+--- !u!114 &6704711490989063350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9084902715954745918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 878f71edbc1a17245b56b739e4c5dbe1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreSlider: {fileID: 0}
+  image: {fileID: 0}
+  rankS: {fileID: 21300000, guid: 8b917b85761ef634eae48e5c0a091ff2, type: 3}
+  rankA: {fileID: 21300000, guid: ef166f629cf2e374ca6fb52c0ecccecd, type: 3}
+  rankB: {fileID: 21300000, guid: 89af320f17fefaa47990ec4212dea683, type: 3}
+  rankC: {fileID: 21300000, guid: 4af8a29de1c5b354c98528c0114f724d, type: 3}
+  rankD: {fileID: 21300000, guid: 869b18933e8377449b2507b8c7b78906, type: 3}
+  startingScore: 16
+  maxScore: 20
