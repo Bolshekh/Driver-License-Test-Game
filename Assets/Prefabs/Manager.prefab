@@ -72,3 +72,19 @@ MonoBehaviour:
   rankD: {fileID: 21300000, guid: 869b18933e8377449b2507b8c7b78906, type: 3}
   startingScore: 16
   maxScore: 20
+  sliderSmooth: 30
+  OnPlayerRankUp:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Ui, Assembly-CSharp
+        m_MethodName: PlayerRankUp
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

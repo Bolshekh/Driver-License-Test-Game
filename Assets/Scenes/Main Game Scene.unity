@@ -834,6 +834,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9a1af169b6a3ea0409af8db0d91b661c, type: 3}
+--- !u!114 &5492727199487916173 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2652348296312779711, guid: 9a1af169b6a3ea0409af8db0d91b661c, type: 3}
+  m_PrefabInstance: {fileID: 5492727199487916166}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e412f01bdda0307498e859163038493b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7135704142707048024
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -901,11 +912,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2849102858006082093, guid: 25fb63b7e152e314fba26aa13580f24e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -12.61
+      value: -11.09
       objectReference: {fileID: 0}
     - target: {fileID: 2849102858006082093, guid: 25fb63b7e152e314fba26aa13580f24e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -8.64
+      value: -7.62
       objectReference: {fileID: 0}
     - target: {fileID: 2849102858006082093, guid: 25fb63b7e152e314fba26aa13580f24e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1073,6 +1084,10 @@ PrefabInstance:
       propertyPath: scoreSlider
       value: 
       objectReference: {fileID: 2033532159}
+    - target: {fileID: 6704711490989063350, guid: 256d72af2d9517c46b58d4829b113898, type: 3}
+      propertyPath: OnPlayerRankUp.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 5492727199487916173}
     - target: {fileID: 8218495583854210413, guid: 256d72af2d9517c46b58d4829b113898, type: 3}
       propertyPath: obstacles
       value: 

@@ -10,13 +10,14 @@ public class PlayerMovement : MonoBehaviour
 	[SerializeField] float rotationSpeed;
 	[SerializeField] float moveSpeed;
 	Rigidbody2D playerRigidBody;
-	[SerializeField] GameObject trail;
-	ParticleSystem trailParticle;
+	[SerializeField] List<GameObject> trail = new List<GameObject>();
+	List<ParticleSystem> trailParticle = new List<ParticleSystem>();
 	[SerializeField] float trailParticleRateOverTime = 10f;
 	[SerializeField] float angleTreshhold = 75;
 	[SerializeField] float forceOnContact = 10f;
 	[SerializeField] float bumpCooldown = 3f;
 	[SerializeField] BoxCollider2D scoreTrigger;
+	[SerializeField] List<TrailRenderer> tracks = new List<TrailRenderer>();
 
 	bool startedTrick = false;
 	[Min(0)]
@@ -28,7 +29,8 @@ public class PlayerMovement : MonoBehaviour
 	void Start()
 	{
 		playerRigidBody = GetComponent<Rigidbody2D>();
-		trailParticle = trail.GetComponent<ParticleSystem>();
+		trail.ForEach(t => trailParticle.Add(t.GetComponent<ParticleSystem>()));
+		StopEmit();
 	}
 
 	// Update is called once per frame
@@ -52,24 +54,40 @@ public class PlayerMovement : MonoBehaviour
 
 		playerRigidBody.AddForce(moveSpeed * transform.up, ForceMode2D.Force);
 
-		trail.transform.rotation = Quaternion.LookRotation(transform.forward, transform.position - (Vector3)playerRigidBody.velocity);
+		trail.ForEach(t=> t.transform.rotation = Quaternion.LookRotation(transform.forward, transform.position - (Vector3)playerRigidBody.velocity));
 	}
 	void Angle(float Angle)
 	{
 		if (Angle > angleTreshhold)
 		{
 			scoreTrigger.enabled = true;
-			var _em = trailParticle.emission;
-			_em.rateOverTime = trailParticleRateOverTime;
+			Emit();
 			startedTrick = true;
 		}
 		else
 		{
 			scoreTrigger.enabled = false;
-			var _em = trailParticle.emission;
-			_em.rateOverTime = 0;
+			StopEmit();
 			startedTrick = false;
 		}
+	}
+	void Emit()
+	{
+		trailParticle.ForEach(t =>
+		{
+			var _em = t.emission;
+			_em.rateOverTime = trailParticleRateOverTime;
+		});
+		tracks.ForEach(t => t.emitting = true);
+	}
+	void StopEmit()
+	{
+		trailParticle.ForEach(t =>
+		{
+			var _em = t.emission;
+			_em.rateOverTime = 0;
+		});
+		tracks.ForEach(t => t.emitting = false);
 	}
 	void DebugRays()
 	{

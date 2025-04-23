@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class PlayerScoreManager : MonoBehaviour
@@ -17,6 +18,12 @@ public class PlayerScoreManager : MonoBehaviour
 	[SerializeField] int maxScore = 100;
 	int currentScore;
 	Ranks currentRank;
+	Ranks prevRank;
+
+	[SerializeField] float sliderSmooth = 30f;
+	float vel;
+
+	public UnityEvent OnPlayerRankUp;
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -25,6 +32,10 @@ public class PlayerScoreManager : MonoBehaviour
 		scoreSlider.value = currentScore;
 		ReEvaluateScoreRank(ref currentRank);
 		UpdateUi();
+	}
+	private void Update()
+	{
+		scoreSlider.value = Mathf.SmoothDamp(scoreSlider.value, currentScore, ref vel, sliderSmooth * Time.deltaTime);
 	}
 	public void ScoreDown()
 	{
@@ -51,10 +62,19 @@ public class PlayerScoreManager : MonoBehaviour
 		else if (currentScore > maxScore * 0.4) curRank = Ranks.B;
 		else if (currentScore > maxScore * 0.2) curRank = Ranks.C;
 		else curRank = Ranks.D;
+
+		if (prevRank != currentRank)
+		{
+			prevRank = currentRank;
+			RankChange();
+		}
+	}
+	void RankChange()
+	{
+		OnPlayerRankUp?.Invoke();
 	}
 	void UpdateUi()
 	{
-		scoreSlider.value = currentScore;
 		switch (currentRank)
 		{
 			case Ranks.S:
