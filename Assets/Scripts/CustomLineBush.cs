@@ -214,7 +214,7 @@ namespace UnityEditor.Tilemaps
 			for (int x = x0; x <= x1; x++)
 			{
 				yield return new Vector2Int((steep ? y : x), (steep ? x : y));
-				error = error - dy;
+				error -= dy;
 				if (error < 0)
 				{
 					y += ystep;
@@ -231,7 +231,7 @@ namespace UnityEditor.Tilemaps
 	[CustomEditor(typeof(CustomLineBrush))]
 	public class CustomLineBrushEditor : GridBrushEditor
 	{
-		private CustomLineBrush lineBrush { get { return target as CustomLineBrush; } }
+		private CustomLineBrush LineBrush { get { return target as CustomLineBrush; } }
 		private Tilemap lastTilemap;
 
 		/// <summary>
@@ -246,33 +246,32 @@ namespace UnityEditor.Tilemaps
 		public override void OnPaintSceneGUI(GridLayout grid, GameObject brushTarget, BoundsInt position, GridBrushBase.Tool tool, bool executing)
 		{
 			base.OnPaintSceneGUI(grid, brushTarget, position, tool, executing);
-			if (lineBrush.lineStartActive && brushTarget != null)
+			if (LineBrush.lineStartActive && brushTarget != null)
 			{
-				Tilemap tilemap = brushTarget.GetComponent<Tilemap>();
-				if (tilemap != null)
+				if (brushTarget.TryGetComponent<Tilemap>(out var tilemap))
 				{
 					tilemap.ClearAllEditorPreviewTiles();
 					lastTilemap = tilemap;
 				}
 
 				// Draw preview tiles for tilemap
-				Vector2Int startPos = new Vector2Int(lineBrush.lineStart.x, lineBrush.lineStart.y);
+				Vector2Int startPos = new Vector2Int(LineBrush.lineStart.x, LineBrush.lineStart.y);
 				Vector2Int endPos = new Vector2Int(position.x, position.y);
 				if (startPos == endPos)
 					PaintPreview(grid, brushTarget, position.min);
 				else
 				{
-					foreach (var point in LineBrush.GetPointsOnLine(startPos, endPos, lineBrush.fillGaps))
+					foreach (var point in Tilemaps.LineBrush.GetPointsOnLine(startPos, endPos, LineBrush.fillGaps))
 					{
-						Vector3Int paintPos = new Vector3Int(point.x, point.y, position.z);
-						PaintPreview(grid, brushTarget, paintPos);
+                        Vector3Int paintPos = new Vector3Int(point.x, point.y, position.z);
+						base.PaintPreview(grid, brushTarget, paintPos);
 					}
 				}
 
 				if (Event.current.type == EventType.Repaint)
 				{
-					var min = lineBrush.lineStart;
-					var max = lineBrush.lineStart + position.size;
+					var min = LineBrush.lineStart;
+					var max = LineBrush.lineStart + position.size;
 
 					// Draws a box on the picked starting position
 					GL.PushMatrix();

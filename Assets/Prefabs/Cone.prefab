@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8434131025300976182}
   - component: {fileID: 5826267934842398033}
   - component: {fileID: 9191465766988308769}
+  - component: {fileID: 1495284468922446658}
   m_Layer: 0
   m_Name: Cone
   m_TagString: Obstacle
@@ -158,3 +159,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.6, y: 0.6}
   m_EdgeRadius: 0
+--- !u!114 &1495284468922446658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3368441962675788422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36acef2324ce3c947a98c92996aec8a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitCones:
+  - {fileID: 21300000, guid: ec51d57a0419405429313918d222e7c3, type: 3}
+  - {fileID: 21300000, guid: 5d274ffdb897dff4798c4e4c20e070ab, type: 3}
+  - {fileID: 21300000, guid: de25b3bed0dae1f4da6d0ad617d176a4, type: 3}

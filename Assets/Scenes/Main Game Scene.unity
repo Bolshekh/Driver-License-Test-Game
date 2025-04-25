@@ -416,17 +416,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1602047234 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6704711490989063350, guid: 256d72af2d9517c46b58d4829b113898, type: 3}
-  m_PrefabInstance: {fileID: 8809839992018761316}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 878f71edbc1a17245b56b739e4c5dbe1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1661653210
 GameObject:
   m_ObjectHideFlags: 0
@@ -954,14 +943,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 4541239689850165766, guid: 25fb63b7e152e314fba26aa13580f24e, type: 3}
-      propertyPath: OnPlayerTrick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1602047234}
-    - target: {fileID: 4541239689850165766, guid: 25fb63b7e152e314fba26aa13580f24e, type: 3}
-      propertyPath: OnPlayerCollision.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1602047234}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

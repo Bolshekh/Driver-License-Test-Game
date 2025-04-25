@@ -25,13 +25,16 @@ public class PlayerScoreManager : MonoBehaviour
 
 	public UnityEvent OnPlayerRankUp;
 	// Start is called before the first frame update
-	void Start()
+	void Awake()
 	{
 		currentScore = startingScore;
 		scoreSlider.maxValue = maxScore;
 		scoreSlider.value = currentScore;
 		ReEvaluateScoreRank(ref currentRank);
 		UpdateUi();
+
+		Cursor.visible = false;
+		Cursor.lockState = CursorLockMode.Locked;
 	}
 	private void Update()
 	{

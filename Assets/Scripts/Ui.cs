@@ -5,14 +5,10 @@ using UnityEngine;
 public class Ui : MonoBehaviour
 {
 	Animator animator;
-	// Start is called before the first frame update
-	void Start()
-	{
-		animator = GetComponent<Animator>();
-	}
-
 	public void PlayerRankUp()
 	{
+		if (animator == null) animator = GetComponent<Animator>();
+
 		animator.CrossFade("score", 0, 0);
 	}
 }

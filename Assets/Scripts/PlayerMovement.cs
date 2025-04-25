@@ -7,22 +7,45 @@ using UnityEngine.Events;
 
 public class PlayerMovement : MonoBehaviour
 {
+	//movement
+	[Header("Movement")]
 	[SerializeField] float rotationSpeed;
 	[SerializeField] float moveSpeed;
 	Rigidbody2D playerRigidBody;
-	[SerializeField] List<GameObject> trail = new List<GameObject>();
-	List<ParticleSystem> trailParticle = new List<ParticleSystem>();
-	[SerializeField] float trailParticleRateOverTime = 10f;
 	[SerializeField] float angleTreshhold = 75;
 	[SerializeField] float forceOnContact = 10f;
-	[SerializeField] float bumpCooldown = 3f;
-	[SerializeField] BoxCollider2D scoreTrigger;
+
+	//effects
+	[Header("Effects")]
+	[SerializeField] List<GameObject> trail = new List<GameObject>();
+	readonly List<ParticleSystem> trailParticle = new List<ParticleSystem>();
+	[SerializeField] float trailParticleRateOverTime = 10f;
 	[SerializeField] List<TrailRenderer> tracks = new List<TrailRenderer>();
 
+	//score
+	[Header("Score")]
 	bool startedTrick = false;
 	[Min(0)]
 	float bumpTimeout;
+	[SerializeField] float bumpCooldown = 3f;
+	[SerializeField] BoxCollider2D scoreTrigger;
 
+	//audio
+	[Header("Audio")]
+	[SerializeField] AudioSource engineAudio;
+	[Range(0,100)]
+	[SerializeField] float audioPitch = 20f;
+	float engineAudioVel;
+	[SerializeField] float audioSmooth = 20;
+
+	[SerializeField] AudioSource skidAudio;
+	float skidAudioVel;
+	float skidPitchAudioVel;
+	[SerializeField] float skidAudioSmooth = 1;
+	bool isDrifting = false;
+
+	//events
+	[Header("Events")]
 	public UnityEvent OnPlayerCollision;
 	public UnityEvent OnPlayerTrick;
 	// Start is called before the first frame update
@@ -46,15 +69,20 @@ public class PlayerMovement : MonoBehaviour
 
 		bumpTimeout -= Time.deltaTime;
 
+		ChangeAudioPitch(0.01f * audioPitch * (Vector3.Distance(Vector3.zero, 0.1f * playerRigidBody.velocity) - 0.5f));
+		ChangeAudioVolume(isDrifting);
+
 		DebugRays();
 	}
 	void MovementAndRotation(float Axis)
 	{
 		transform.Rotate(0, 0, rotationSpeed * Axis * (-1) * Time.deltaTime);
 
-		playerRigidBody.AddForce(moveSpeed * transform.up, ForceMode2D.Force);
+		playerRigidBody.AddForce(moveSpeed * Time.deltaTime * transform.up, ForceMode2D.Force);
 
-		trail.ForEach(t=> t.transform.rotation = Quaternion.LookRotation(transform.forward, transform.position - (Vector3)playerRigidBody.velocity));
+		trail.ForEach(
+			t=>t.transform.rotation = Quaternion.LookRotation(transform.forward, transform.position - (Vector3)playerRigidBody.velocity)
+		);
 	}
 	void Angle(float Angle)
 	{
@@ -63,12 +91,14 @@ public class PlayerMovement : MonoBehaviour
 			scoreTrigger.enabled = true;
 			Emit();
 			startedTrick = true;
+			isDrifting = true;
 		}
 		else
 		{
 			scoreTrigger.enabled = false;
 			StopEmit();
 			startedTrick = false;
+			isDrifting = false;
 		}
 	}
 	void Emit()
@@ -94,6 +124,15 @@ public class PlayerMovement : MonoBehaviour
 		Debug.DrawRay(transform.position, transform.up, Color.magenta, 0.5f);
 		Debug.DrawRay(transform.position, Vector3.Normalize((Vector3)playerRigidBody.velocity), Color.yellow, 0.5f);
 	}
+	void ChangeAudioPitch(float Value)
+	{
+		engineAudio.pitch = Mathf.SmoothDamp(engineAudio.pitch, 1 + Value, ref engineAudioVel, audioSmooth);
+		skidAudio.pitch = Mathf.SmoothDamp(skidAudio.pitch, 1 + Value, ref skidPitchAudioVel, audioSmooth);
+	}
+	void ChangeAudioVolume(bool isDrifting)
+	{
+		skidAudio.volume = Mathf.Clamp(Mathf.SmoothDamp(skidAudio.volume, isDrifting ? 1 : 0, ref skidAudioVel, skidAudioSmooth), 0, 0.3f);
+	}
 	private void OnCollisionEnter2D(Collision2D collision)
 	{
 		playerRigidBody.velocity = new Vector2(0, 0);
@@ -105,6 +144,9 @@ public class PlayerMovement : MonoBehaviour
 		startedTrick = false;
 
 		bumpTimeout = bumpCooldown;
+
+		if (collision.collider.gameObject.CompareTag("Obstacle"))
+			collision.collider.gameObject.GetComponent<Cone>().Hit();
 	}
 	private void OnTriggerExit2D(Collider2D collision)
 	{
