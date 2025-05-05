@@ -15,7 +15,7 @@ AudioMixerGroupController:
   m_Send: 00000000000000000000000000000000
   m_Effects:
   - {fileID: -8331396999469909266}
-  m_UserColorIndex: 0
+  m_UserColorIndex: 1
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
@@ -48,7 +48,9 @@ AudioMixerController:
   m_SuspendThreshold: -80
   m_EnableSuspend: 1
   m_UpdateMode: 0
-  m_ExposedParameters: []
+  m_ExposedParameters:
+  - guid: 9f2f02a105f4648409316332ea5f99e5
+    name: CarVolume
   m_AudioMixerGroupViews:
   - guids:
     - 2d33f71a0668e1c46963627e540c172d
@@ -99,5 +101,7 @@ AudioMixerSnapshotController:
   m_Name: Snapshot
   m_AudioMixer: {fileID: 24100000}
   m_SnapshotID: ee1aa80efeae8104993e1c2fc53a6a6e
-  m_FloatValues: {}
+  m_FloatValues:
+    9f2f02a105f4648409316332ea5f99e5: 0
+    baa3f266843bd08479d6c83868699fc9: 0
   m_TransitionOverrides: {}

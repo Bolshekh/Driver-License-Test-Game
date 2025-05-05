@@ -10,7 +10,9 @@ public class PlayerMovement : MonoBehaviour
 	//movement
 	[Header("Movement")]
 	[SerializeField] float rotationSpeed;
+	float rotationMultiplier = 1f;
 	[SerializeField] float moveSpeed;
+	float speedMultiplier = 1f;
 	Rigidbody2D playerRigidBody;
 	[SerializeField] float angleTreshhold = 75;
 	[SerializeField] float forceOnContact = 10f;
@@ -48,9 +50,14 @@ public class PlayerMovement : MonoBehaviour
 	[Header("Events")]
 	public UnityEvent OnPlayerCollision;
 	public UnityEvent OnPlayerTrick;
+	public UnityEvent OnPlayerWon;
+	public UnityEvent OnPlayerEscapeButton;
 	// Start is called before the first frame update
 	void Start()
 	{
+		speedMultiplier = 1;
+		rotationMultiplier = 1;
+
 		playerRigidBody = GetComponent<Rigidbody2D>();
 		trail.ForEach(t => trailParticle.Add(t.GetComponent<ParticleSystem>()));
 		StopEmit();
@@ -67,6 +74,8 @@ public class PlayerMovement : MonoBehaviour
 
 		Angle(_angle);
 
+		OtherInput();
+
 		bumpTimeout -= Time.deltaTime;
 
 		ChangeAudioPitch(0.01f * audioPitch * (Vector3.Distance(Vector3.zero, 0.1f * playerRigidBody.velocity) - 0.5f));
@@ -76,9 +85,9 @@ public class PlayerMovement : MonoBehaviour
 	}
 	void MovementAndRotation(float Axis)
 	{
-		transform.Rotate(0, 0, rotationSpeed * Axis * (-1) * Time.deltaTime);
+		transform.Rotate(0, 0, rotationSpeed * rotationMultiplier * Axis * (-1) * Time.deltaTime);
 
-		playerRigidBody.AddForce(moveSpeed * Time.deltaTime * transform.up, ForceMode2D.Force);
+		playerRigidBody.AddForce(moveSpeed * speedMultiplier * Time.deltaTime * transform.up, ForceMode2D.Force);
 
 		trail.ForEach(
 			t=>t.transform.rotation = Quaternion.LookRotation(transform.forward, transform.position - (Vector3)playerRigidBody.velocity)
@@ -127,11 +136,18 @@ public class PlayerMovement : MonoBehaviour
 	void ChangeAudioPitch(float Value)
 	{
 		engineAudio.pitch = Mathf.SmoothDamp(engineAudio.pitch, 1 + Value, ref engineAudioVel, audioSmooth);
-		skidAudio.pitch = Mathf.SmoothDamp(skidAudio.pitch, 1 + Value, ref skidPitchAudioVel, audioSmooth);
+		skidAudio.pitch = Mathf.SmoothDamp(skidAudio.pitch, 0.7f + Value, ref skidPitchAudioVel, audioSmooth);
 	}
 	void ChangeAudioVolume(bool isDrifting)
 	{
 		skidAudio.volume = Mathf.Clamp(Mathf.SmoothDamp(skidAudio.volume, isDrifting ? 1 : 0, ref skidAudioVel, skidAudioSmooth), 0, 0.3f);
+	}
+	void OtherInput()
+	{
+		if(Input.GetButtonDown("Cancel"))
+		{
+			OnPlayerEscapeButton?.Invoke();
+		}
 	}
 	private void OnCollisionEnter2D(Collision2D collision)
 	{
@@ -151,5 +167,14 @@ public class PlayerMovement : MonoBehaviour
 	private void OnTriggerExit2D(Collider2D collision)
 	{
 		if (startedTrick && bumpTimeout <= 0) OnPlayerTrick?.Invoke();
+	}
+	private void OnTriggerEnter2D(Collider2D collision)
+	{
+		if (collision.CompareTag("WinTrigger"))
+		{
+			speedMultiplier = 0;
+			rotationMultiplier = 0;
+			OnPlayerWon?.Invoke();
+		}
 	}
 }
