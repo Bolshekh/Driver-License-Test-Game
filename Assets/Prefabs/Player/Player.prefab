@@ -5200,6 +5200,24 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  OnPlayerWon:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPlayerEscapeButton:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
+        m_MethodName: SwitchMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!61 &5445826695183097196
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -14987,7 +15005,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -9209760180030758983, guid: c7ab9639987202a44bd0059f1e030113, type: 2}
   m_audioClip: {fileID: 8300000, guid: 18038e8465166d248b91c2767dcf8057, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.3
+  m_Volume: 0
   m_Pitch: 1
   Loop: 1
   Mute: 0

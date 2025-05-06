@@ -140,6 +140,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Grid
       objectReference: {fileID: 0}
+    - target: {fileID: 7226630430736974791, guid: 9f5f54af892a0c1419f61f8c1acd8070, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8696175200221413622, guid: 9f5f54af892a0c1419f61f8c1acd8070, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -194,8 +198,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 257828546}
+  - component: {fileID: 257828547}
   m_Layer: 0
-  m_Name: Obstackes
+  m_Name: Generator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -216,6 +221,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &257828547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 257828545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2ed2df153e43ab449ab9d1065c1b0fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lines:
+  - {fileID: 1341040797}
+  - {fileID: 1631627759}
+  obstacles: {fileID: 1591797244}
+  cone: {fileID: 3368441962675788422, guid: 1a088b6cddbda634b8244751d6d80c58, type: 3}
+  coneDensity: 2
 --- !u!1001 &302665559
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -267,6 +290,10 @@ PrefabInstance:
     - target: {fileID: 3791914704400664636, guid: 25fb63b7e152e314fba26aa13580f24e, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 3791914704400664636, guid: 25fb63b7e152e314fba26aa13580f24e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4541239689850165766, guid: 25fb63b7e152e314fba26aa13580f24e, type: 3}
       propertyPath: OnPlayerTrick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -393,15 +420,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5090838584972912264, guid: 9a1af169b6a3ea0409af8db0d91b661c, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5090838584972912264, guid: 9a1af169b6a3ea0409af8db0d91b661c, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7688730071228425546, guid: 9a1af169b6a3ea0409af8db0d91b661c, type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 7688730071228425546, guid: 9a1af169b6a3ea0409af8db0d91b661c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -506,6 +537,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Manager
       objectReference: {fileID: 0}
+    - target: {fileID: 9084902715954745918, guid: 256d72af2d9517c46b58d4829b113898, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -582,8 +617,8 @@ LineRenderer:
   - {x: -6.798548, y: 80.77442, z: 0}
   - {x: -10.1041765, y: 86.83631, z: 0}
   - {x: -12.01588, y: 100.681564, z: 0}
-  - {x: -6.914318, y: 111.454216, z: 0}
-  - {x: -14.354827, y: 111.2027, z: 0}
+  - {x: -6.6643343, y: 115.28731, z: 0}
+  - {x: -14.104843, y: 115.03579, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.1
@@ -650,6 +685,37 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1341040796}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1591797244
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1591797245}
+  m_Layer: 0
+  m_Name: obstacles
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1591797245
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1591797244}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -734,8 +800,8 @@ LineRenderer:
   - {x: 9.357115, y: 88.73927, z: 0}
   - {x: 9.030343, y: 89.71959, z: 0}
   - {x: 7.1836205, y: 103.44831, z: 0}
-  - {x: 9.078402, y: 111.40692, z: 0}
-  - {x: 14.551946, y: 112.051865, z: 0}
+  - {x: 9.661698, y: 115.07335, z: 0}
+  - {x: 15.135242, y: 115.71829, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.1
@@ -821,6 +887,10 @@ PrefabInstance:
     - target: {fileID: 2399176765473988285, guid: cd4c847647d982146bf9b019985fbacc, type: 3}
       propertyPath: m_Name
       value: Main Camera
+      objectReference: {fileID: 0}
+    - target: {fileID: 2399176765473988285, guid: cd4c847647d982146bf9b019985fbacc, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7349073115692086287, guid: cd4c847647d982146bf9b019985fbacc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -919,6 +989,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Follower
       objectReference: {fileID: 0}
+    - target: {fileID: 7806602111303902141, guid: 30f9e434f9d3c894582b90a9a4f1c184, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7819347350542051418, guid: 30f9e434f9d3c894582b90a9a4f1c184, type: 3}
       propertyPath: player
       value: 
@@ -984,6 +1058,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Virtual Camera
       objectReference: {fileID: 0}
+    - target: {fileID: 5945204267974334586, guid: 3cc912d049aaf364bb0b542aaf0c0498, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1001,5 +1079,6 @@ SceneRoots:
   - {fileID: 183450024}
   - {fileID: 936071373}
   - {fileID: 257828546}
+  - {fileID: 1591797245}
   - {fileID: 1341040798}
   - {fileID: 1631627760}

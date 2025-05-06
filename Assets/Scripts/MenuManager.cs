@@ -9,6 +9,7 @@ public class MenuManager : MonoBehaviour
 	[SerializeField] GameObject menuUi;
 	[SerializeField] AudioMixer audioMixer;
 
+	public int CurrentLevel { get; set; } = 2;
 	public void SwitchMenu()
 	{
 		if (menuUi.activeSelf)
@@ -50,17 +51,21 @@ public class MenuManager : MonoBehaviour
 	public void ReloadCurrentScene()
 	{
 		CloseMenu();
-		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+		SceneManager.LoadSceneAsync(1);
+		SceneManager.LoadSceneAsync(CurrentLevel, LoadSceneMode.Additive);
 	}
 	public void LoadNextScene()
 	{
 		CloseMenu();
-		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+		SceneManager.LoadSceneAsync(1);
+		SceneManager.LoadSceneAsync(CurrentLevel + 1, LoadSceneMode.Additive);
+		CurrentLevel++;
 	}
 	public void LoadScene(int SceneIndex)
 	{
 		CloseMenu();
-		SceneManager.LoadScene(SceneIndex);
+		SceneManager.LoadSceneAsync(1);
+		SceneManager.LoadSceneAsync(SceneIndex, LoadSceneMode.Additive);
 	}
 	public void LoadScene(string SceneName)
 	{
