@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -39,6 +38,8 @@ public class PlayerMovement : MonoBehaviour
 	[SerializeField] float audioPitch = 20f;
 	float engineAudioVel;
 	[SerializeField] float audioSmooth = 20;
+
+	[SerializeField] AudioSource crashAudio;
 
 	[SerializeField] AudioSource skidAudio;
 	float skidAudioVel;
@@ -148,6 +149,11 @@ public class PlayerMovement : MonoBehaviour
 		{
 			OnPlayerEscapeButton?.Invoke();
 		}
+	}
+	public void PlayCrashSound()
+	{
+		crashAudio.pitch = 1 + UnityEngine.Random.Range(-audioPitch * 0.005f, audioPitch * 0.005f);
+		crashAudio.Play();
 	}
 	private void OnCollisionEnter2D(Collision2D collision)
 	{

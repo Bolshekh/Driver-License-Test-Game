@@ -13,11 +13,17 @@ public class PlayerScoreManager : MonoBehaviour
 	[SerializeField] Sprite rankB;
 	[SerializeField] Sprite rankC;
 	[SerializeField] Sprite rankD;
+	public static PlayerScoreManager Instance { get; protected set; }
 	[Min(0)]
 	[SerializeField] int startingScore = 80;
 	[SerializeField] int maxScore = 100;
 	int currentScore;
 	Ranks currentRank;
+	public Ranks CurrentRank 
+	{
+		get => currentRank;
+		private set => currentRank = value;
+	}
 	Ranks prevRank;
 
 	[SerializeField] float sliderSmooth = 30f;
@@ -27,11 +33,15 @@ public class PlayerScoreManager : MonoBehaviour
 	// Start is called before the first frame update
 	void Awake()
 	{
+		Instance = this;
+
 		currentScore = startingScore;
 		scoreSlider.maxValue = maxScore;
 		scoreSlider.value = currentScore;
 		ReEvaluateScoreRank(ref currentRank);
-		UpdateUi();
+		image.sprite = GetRankSprite(CurrentRank);
+
+
 
 		Cursor.visible = false;
 		Cursor.lockState = CursorLockMode.Locked;
@@ -47,7 +57,7 @@ public class PlayerScoreManager : MonoBehaviour
 		if (currentScore < 0) currentScore = 0;
 
 		ReEvaluateScoreRank(ref currentRank);
-		UpdateUi();
+		image.sprite = GetRankSprite(CurrentRank);
 	}
 	public void ScoreUp()
 	{
@@ -56,7 +66,7 @@ public class PlayerScoreManager : MonoBehaviour
 		if (currentScore > maxScore) currentScore = maxScore;
 
 		ReEvaluateScoreRank(ref currentRank);
-		UpdateUi();
+		image.sprite = GetRankSprite(CurrentRank);
 	}
 	void ReEvaluateScoreRank(ref Ranks curRank)
 	{
@@ -76,33 +86,13 @@ public class PlayerScoreManager : MonoBehaviour
 	{
 		OnPlayerRankUp?.Invoke();
 	}
-	void UpdateUi()
+	public static Sprite GetRankSprite(Ranks currentRank) => currentRank switch
 	{
-		switch (currentRank)
-		{
-			case Ranks.S:
-				image.sprite = rankS;
-				break;
-			case Ranks.A:
-				image.sprite = rankA;
-				break;
-			case Ranks.B:
-				image.sprite = rankB;
-				break;
-			case Ranks.C:
-				image.sprite = rankC;
-				break;
-			case Ranks.D:
-				image.sprite = rankD;
-				break;
-		}
-	}
-}
-public enum Ranks
-{
-	S,
-	A,
-	B,
-	C,
-	D
+		Ranks.S => Instance.rankS,
+		Ranks.A => Instance.rankA,
+		Ranks.B => Instance.rankB,
+		Ranks.C => Instance.rankC,
+		Ranks.D => Instance.rankD,
+		_ => Instance.rankD,
+	};
 }
