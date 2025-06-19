@@ -43,8 +43,8 @@ public class PlayerScoreManager : MonoBehaviour
 
 
 
-		Cursor.visible = false;
-		Cursor.lockState = CursorLockMode.Locked;
+		//Cursor.visible = false;
+		//Cursor.lockState = CursorLockMode.Locked;
 	}
 	private void Update()
 	{

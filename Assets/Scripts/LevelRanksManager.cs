@@ -1,5 +1,6 @@
 
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -16,7 +17,8 @@ public static class LevelRanksManager
 			Levels[Levels.IndexOf(_level)] = new Level()
 			{
 				BuildIndex = Level.BuildIndex,
-				BestRank = EvaluateHigherRank(_level.BestRank, Level.BestRank)
+				BestRank = EvaluateHigherRank(_level.BestRank, Level.BestRank),
+				BestTime = TimeSpan.FromTicks(Math.Min(_level.BestTime.Ticks, Level.BestTime.Ticks))
 			};
 		}
 		else
@@ -47,4 +49,5 @@ public struct Level
 {
 	public int BuildIndex { get; set; }
 	public Ranks BestRank { get; set; }
+	public TimeSpan BestTime { get; set; }
 }

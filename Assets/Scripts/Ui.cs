@@ -1,6 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,14 +6,26 @@ public class Ui : MonoBehaviour
 {
 	[SerializeField] GameObject levelSelectorContents;
 	Animator animator;
+	[SerializeField] TMP_Text timerText;
+	float levelStart;
+	static public float TimeTotal;
 	public void PlayerRankUp()
 	{
 		if (animator == null) animator = GetComponent<Animator>();
 
 		animator.CrossFade("score", 0, 0);
 	}
+	private void Update()
+	{
+		if (timerText == null) return;
+		Debug.Log(Time.time - levelStart);
+		TimeTotal = Time.time - levelStart;
+		timerText.text = System.TimeSpan.FromSeconds(TimeTotal).ToString(@"mm\:ss\:fff");
+		//timerText.text = new DateTime(TimeSpan.FromSeconds(Time.time - levelStart).Ticks).ToString("mm:ss:ff");
+	}
 	private void Awake()
 	{
+		levelStart = Time.time;
 		if (levelSelectorContents == null) return;
 
 		foreach (Level level in LevelRanksManager.Levels)
@@ -25,6 +35,11 @@ public class Ui : MonoBehaviour
 				if (transform.CompareTag("UiRank"))
 				{
 					transform.GetComponent<Image>().sprite = PlayerScoreManager.GetRankSprite(level.BestRank);
+					transform.gameObject.SetActive(true);
+				}
+				if (transform.CompareTag("UiTime"))
+				{
+					transform.GetComponent<TMP_Text>().text = level.BestTime.ToString(@"mm\:ss\:ff");
 					transform.gameObject.SetActive(true);
 				}
 			}

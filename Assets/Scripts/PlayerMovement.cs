@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
 	Rigidbody2D playerRigidBody;
 	[SerializeField] float angleTreshhold = 75;
 	[SerializeField] float forceOnContact = 10f;
+	float uiInput;
 
 	//effects
 	[Header("Effects")]
@@ -67,7 +68,7 @@ public class PlayerMovement : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		var _hor = Input.GetAxis("Horizontal");
+		var _hor = Mathf.Clamp(Input.GetAxis("Horizontal") + uiInput, -1, 1);
 
 		MovementAndRotation(_hor);
 
@@ -83,6 +84,10 @@ public class PlayerMovement : MonoBehaviour
 		ChangeAudioVolume(isDrifting);
 
 		DebugRays();
+	}
+	public void AddUiInput(float Axis)
+	{
+		uiInput = Axis;
 	}
 	void MovementAndRotation(float Axis)
 	{

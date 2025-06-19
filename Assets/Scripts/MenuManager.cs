@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
@@ -21,20 +19,21 @@ public class MenuManager : MonoBehaviour
 		{
 			OpenMenu();
 		}
+		
 	}
 	public void OpenMenu()
 	{
 		menuUi.SetActive(true);
-		Cursor.lockState = CursorLockMode.None;
-		Cursor.visible = true;
+		//Cursor.lockState = CursorLockMode.None;
+		//Cursor.visible = true;
 		Time.timeScale = 0f;
 		audioMixer.SetFloat("CarVolume", -80);
 	}
 	public void CloseMenu()
 	{
 		menuUi.SetActive(false);
-		Cursor.lockState = CursorLockMode.Locked;
-		Cursor.visible = false;
+		//Cursor.lockState = CursorLockMode.Locked;
+		//Cursor.visible = false;
 		Time.timeScale = 1f;
 		audioMixer.SetFloat("CarVolume", 0);
 	}
@@ -50,7 +49,8 @@ public class MenuManager : MonoBehaviour
 		LevelRanksManager.NewScore(new Level()
 		{
 			BuildIndex = LevelRanksManager.CurrentLevel,
-			BestRank = score.CurrentRank
+			BestRank = score.CurrentRank,
+			BestTime = System.TimeSpan.FromSeconds(Ui.TimeTotal)
 		});
 	}
 	public void Exit()
@@ -61,8 +61,8 @@ public class MenuManager : MonoBehaviour
 	{
 		CloseMenu();
 		SceneManager.LoadScene(0);
-		Cursor.lockState = CursorLockMode.None;
-		Cursor.visible = true;
+		//Cursor.lockState = CursorLockMode.None;
+		//Cursor.visible = true;
 	}
 	public void ReloadCurrentScene()
 	{
