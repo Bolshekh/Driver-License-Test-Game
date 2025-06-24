@@ -7,6 +7,8 @@ public class Ui : MonoBehaviour
 	[SerializeField] GameObject levelSelectorContents;
 	Animator animator;
 	[SerializeField] TMP_Text timerText;
+	[SerializeField] Texture2D cursorTexture;
+	[SerializeField] Vector2 cursorHotspot;
 	float levelStart;
 	static public float TimeTotal;
 	public void PlayerRankUp()
@@ -25,6 +27,7 @@ public class Ui : MonoBehaviour
 	}
 	private void Awake()
 	{
+		//Cursor.SetCursor(cursorTexture, cursorHotspot, CursorMode.ForceSoftware);
 		levelStart = Time.time;
 		if (levelSelectorContents == null) return;
 

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameFull: YandexGamesPlatform
   projectSettings:
-    selectWebGLTemplate: 1
+    selectWebGLTemplate: 0
     runInBackground: 0
     enableExceptions: 2
     compressionFormat: 0
