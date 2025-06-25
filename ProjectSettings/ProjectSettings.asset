@@ -553,7 +553,7 @@ PlayerSettings:
   webGLDebugSymbols: 0
   webGLEmscriptenArgs: 
   webGLModulesDirectory: 
-  webGLTemplate: APPLICATION:Default
+  webGLTemplate: PROJECT:YandexGames
   webGLAnalyzeBuildSize: 0
   webGLUseEmbeddedResources: 0
   webGLCompressionFormat: 0
@@ -571,7 +571,7 @@ PlayerSettings:
   scriptingDefineSymbols:
     Server: 
     Standalone: PLUGIN_YG_2;YandexGamesPlatform_yg;TMP_YG2
-    WebGL: PLUGIN_YG_2;YandexGamesPlatform_yg;TMP_YG2
+    WebGL: PLUGIN_YG_2;YandexGamesPlatform_yg;TMP_YG2;InterstitialAdv_yg
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend: {}

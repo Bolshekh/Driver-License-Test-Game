@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-
+using YG;
 public class Ui : MonoBehaviour
 {
 	[SerializeField] GameObject levelSelectorContents;
@@ -47,5 +47,10 @@ public class Ui : MonoBehaviour
 				}
 			}
 		}
+	}
+	public void ShowAd()
+	{
+		YG2.InterstitialAdvShow();
+
 	}
 }
