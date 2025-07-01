@@ -2,32 +2,36 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using YG;
+using DG.Tweening;
+
 public class Ui : MonoBehaviour
 {
 	[SerializeField] GameObject levelSelectorContents;
 	Animator animator;
 	[SerializeField] TMP_Text timerText;
-	[SerializeField] Texture2D cursorTexture;
-	[SerializeField] Vector2 cursorHotspot;
+	[SerializeField] GameObject rank;
+
+	[Header("RankScale")]
+
+	[SerializeField] float endScale;
+	[SerializeField] float duration;
+	[SerializeField] float elastic;
+	[SerializeField] int vibrato;
 	float levelStart;
 	static public float TimeTotal;
 	public void PlayerRankUp()
 	{
-		if (animator == null) animator = GetComponent<Animator>();
-
-		animator.CrossFade("score", 0, 0);
+		rank.transform.DOPunchScale(new Vector3(endScale, endScale, endScale), duration, vibrato, elastic).SetEase(Ease.InBounce).SetLoops(1, LoopType.Yoyo).Play();
 	}
 	private void Update()
 	{
 		if (timerText == null) return;
-		Debug.Log(Time.time - levelStart);
+
 		TimeTotal = Time.time - levelStart;
 		timerText.text = System.TimeSpan.FromSeconds(TimeTotal).ToString(@"mm\:ss\:fff");
-		//timerText.text = new DateTime(TimeSpan.FromSeconds(Time.time - levelStart).Ticks).ToString("mm:ss:ff");
 	}
 	private void Awake()
 	{
-		//Cursor.SetCursor(cursorTexture, cursorHotspot, CursorMode.ForceSoftware);
 		levelStart = Time.time;
 		if (levelSelectorContents == null) return;
 

@@ -50,7 +50,8 @@ public class MenuManager : MonoBehaviour
 		{
 			BuildIndex = LevelRanksManager.CurrentLevel,
 			BestRank = score.CurrentRank,
-			BestTime = System.TimeSpan.FromSeconds(Ui.TimeTotal)
+			BestTime = System.TimeSpan.FromSeconds(Ui.TimeTotal),
+			BestScore = PlayerScoreManager.Instance.EvaluateScore(score.CurrentRank, Ui.TimeTotal)
 		});
 	}
 	public void Exit()

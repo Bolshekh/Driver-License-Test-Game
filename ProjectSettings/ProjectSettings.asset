@@ -569,9 +569,24 @@ PlayerSettings:
   webGLMemoryGeometricGrowthCap: 96
   webGLPowerPreference: 2
   scriptingDefineSymbols:
+    Android: DOTWEEN
+    EmbeddedLinux: DOTWEEN
+    GameCoreScarlett: DOTWEEN
+    GameCoreXboxOne: DOTWEEN
+    LinuxHeadlessSimulation: DOTWEEN
+    Nintendo Switch: DOTWEEN
+    PS4: DOTWEEN
+    PS5: DOTWEEN
+    QNX: DOTWEEN
     Server: 
-    Standalone: PLUGIN_YG_2;YandexGamesPlatform_yg;TMP_YG2
-    WebGL: PLUGIN_YG_2;YandexGamesPlatform_yg;TMP_YG2;InterstitialAdv_yg
+    Stadia: DOTWEEN
+    Standalone: PLUGIN_YG_2;YandexGamesPlatform_yg;TMP_YG2;DOTWEEN
+    VisionOS: DOTWEEN
+    WebGL: PLUGIN_YG_2;YandexGamesPlatform_yg;TMP_YG2;InterstitialAdv_yg;DOTWEEN
+    Windows Store Apps: DOTWEEN
+    XboxOne: DOTWEEN
+    iPhone: DOTWEEN
+    tvOS: DOTWEEN
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend: {}

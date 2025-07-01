@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,6 +18,8 @@ public class PlayerScoreManager : MonoBehaviour
 	[Min(0)]
 	[SerializeField] int startingScore = 80;
 	[SerializeField] int maxScore = 100;
+
+	[SerializeField] AnimationCurve timeScore;
 	int currentScore;
 	Ranks currentRank;
 	public Ranks CurrentRank 
@@ -67,6 +70,11 @@ public class PlayerScoreManager : MonoBehaviour
 
 		ReEvaluateScoreRank(ref currentRank);
 		image.sprite = GetRankSprite(CurrentRank);
+	}
+	public int EvaluateScore(Ranks Rank, float TotalTimeSeconds)
+	{
+		Debug.Log($"R-{(int)Rank} T-{(int)timeScore.Evaluate(TotalTimeSeconds)} = {(int)Rank + (int)timeScore.Evaluate(TotalTimeSeconds)}");
+		return (int)Rank + (int)timeScore.Evaluate(TotalTimeSeconds);
 	}
 	void ReEvaluateScoreRank(ref Ranks curRank)
 	{
