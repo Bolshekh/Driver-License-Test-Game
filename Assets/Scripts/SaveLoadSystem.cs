@@ -5,28 +5,33 @@ using YG;
 
 public class SaveLoadSystem : MonoBehaviour
 {
-	// Start is called before the first frame update
+	public static SaveLoadSystem Instance { get; set; }
 	void Start()
 	{
 		YG2.onGetSDKData += GetSavesData;
+
+		if (SaveLoadSystem.Instance == null)
+			Instance = this;
+		else
+			Destroy(gameObject);
 	}
 	private void OnEnable()
 	{
 		YG2.onGetSDKData += GetSavesData;
 	}
 
-	// Отписываемся от ивента onGetSDKData
 	private void OnDisable()
 	{
 		YG2.onGetSDKData -= GetSavesData;
 	}
 
-	void GetSavesData()
+	public void GetSavesData()
 	{
 		LevelRanksManager.LoadLevelsData(YG2.saves.Levels);
+		Debug.Log(YG2.saves.Levels.Count);
 	}
 
-	void SetSavesData(List<Level> Levels)
+	public void SetSavesData(List<Level> Levels)
 	{
 		YG2.saves.Levels = LevelRanksManager.Levels;
 

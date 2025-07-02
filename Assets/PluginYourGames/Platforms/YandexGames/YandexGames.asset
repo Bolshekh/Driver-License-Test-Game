@@ -17,6 +17,8 @@ MonoBehaviour:
     showFirstAdv: 0
     interAdvInterval: 5
     postponeCallByFail: 0
+    saveLocal: 0
+    saveCloud: 1
     selectWebGLTemplate: 1
     runInBackground: 0
     enableExceptions: 2

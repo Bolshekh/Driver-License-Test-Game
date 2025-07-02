@@ -27,6 +27,7 @@ public static class LevelRanksManager
 		{
 			Levels.Add(Level);
 		}
+		SaveLoadSystem.Instance.SetSavesData(Levels);
 	}
 	public static Ranks EvaluateHigherRank(Ranks FirstRank, Ranks SecondRank)
 	{
@@ -39,7 +40,8 @@ public static class LevelRanksManager
 	}
 	public static void LoadLevelsData(List<Level> levels)
 	{
-		Levels = levels;
+		if (levels != null)
+			Levels = levels;
 	}
 }
 public enum Ranks

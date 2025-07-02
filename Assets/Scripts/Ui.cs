@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using YG;
 using DG.Tweening;
+using System.Runtime.InteropServices;
 
 public class Ui : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class Ui : MonoBehaviour
 	Animator animator;
 	[SerializeField] TMP_Text timerText;
 	[SerializeField] GameObject rank;
+	[SerializeField] TMP_Text lang;
 
 	[Header("RankScale")]
 
@@ -33,6 +35,15 @@ public class Ui : MonoBehaviour
 	private void Awake()
 	{
 		levelStart = Time.time;
+		try
+		{
+			lang.text = GetLang();
+		}
+		catch
+		{
+
+		}
+
 		if (levelSelectorContents == null) return;
 
 		foreach (Level level in LevelRanksManager.Levels)
@@ -57,4 +68,6 @@ public class Ui : MonoBehaviour
 		YG2.InterstitialAdvShow();
 
 	}
+	[DllImport("__Internal")]
+	private static extern string GetLang();
 }
