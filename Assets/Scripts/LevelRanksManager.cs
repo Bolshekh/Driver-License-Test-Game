@@ -9,6 +9,8 @@ public static class LevelRanksManager
 {
 	public static int CurrentLevel { get; set; } = 2;
 	public static List<Level> Levels { get; private set; } = new List<Level>();
+
+	public static event EventHandler OnSavesLoaded;
 	public static void NewScore(Level Level)
 	{
 		if (Levels.Where(l => l.BuildIndex == Level.BuildIndex).Count() > 0)
@@ -16,17 +18,15 @@ public static class LevelRanksManager
 			Level _level = Levels.Find(l => l.BuildIndex == Level.BuildIndex);
 			if (Level.BestScore > _level.BestScore)
 				Levels[Levels.IndexOf(_level)] = Level;
-				//{
-				//	BuildIndex = Level.BuildIndex,
-				//	BestRank = Level.BestRank,
-				//	BestTime = Level.BestTime,
-				//	BestScore = 
-				//};
 		}
 		else
 		{
 			Levels.Add(Level);
 		}
+		SaveLevels();
+	}
+	public static void SaveLevels()
+	{
 		SaveLoadSystem.Instance.SetSavesData(Levels);
 	}
 	public static Ranks EvaluateHigherRank(Ranks FirstRank, Ranks SecondRank)
@@ -41,7 +41,10 @@ public static class LevelRanksManager
 	public static void LoadLevelsData(List<Level> levels)
 	{
 		if (levels != null)
+		{
 			Levels = levels;
+			OnSavesLoaded?.Invoke(null, EventArgs.Empty);
+		}
 	}
 }
 public enum Ranks
@@ -53,10 +56,12 @@ public enum Ranks
 	D = 0
 }
 
+[System.Serializable]
 public struct Level
 {
-	public int BuildIndex { get; set; }
-	public Ranks BestRank { get; set; }
-	public TimeSpan BestTime { get; set; }
-	public int BestScore { get; set; }
+	public int BuildIndex;
+	public Ranks BestRank;
+	
+	public float BestTime;
+	public int BestScore;
 }

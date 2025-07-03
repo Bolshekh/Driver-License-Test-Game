@@ -9,11 +9,6 @@ public class PlayerScoreManager : MonoBehaviour
 {
 	[SerializeField] Slider scoreSlider;
 	[SerializeField] Image image;
-	[SerializeField] Sprite rankS;
-	[SerializeField] Sprite rankA;
-	[SerializeField] Sprite rankB;
-	[SerializeField] Sprite rankC;
-	[SerializeField] Sprite rankD;
 	public static PlayerScoreManager Instance { get; protected set; }
 	[Min(0)]
 	[SerializeField] int startingScore = 80;
@@ -36,13 +31,16 @@ public class PlayerScoreManager : MonoBehaviour
 	// Start is called before the first frame update
 	void Awake()
 	{
-		Instance = this;
+		if (Instance == null)
+			Instance = this;
+		else
+			Destroy(this);
 
 		currentScore = startingScore;
 		scoreSlider.maxValue = maxScore;
 		scoreSlider.value = currentScore;
 		ReEvaluateScoreRank(ref currentRank);
-		image.sprite = GetRankSprite(CurrentRank);
+		image.sprite = RanksSprites.GetRankSprite(CurrentRank);
 
 
 
@@ -60,7 +58,7 @@ public class PlayerScoreManager : MonoBehaviour
 		if (currentScore < 0) currentScore = 0;
 
 		ReEvaluateScoreRank(ref currentRank);
-		image.sprite = GetRankSprite(CurrentRank);
+		image.sprite = RanksSprites.GetRankSprite(CurrentRank);
 	}
 	public void ScoreUp()
 	{
@@ -69,7 +67,7 @@ public class PlayerScoreManager : MonoBehaviour
 		if (currentScore > maxScore) currentScore = maxScore;
 
 		ReEvaluateScoreRank(ref currentRank);
-		image.sprite = GetRankSprite(CurrentRank);
+		image.sprite = RanksSprites.GetRankSprite(CurrentRank);
 	}
 	public int EvaluateScore(Ranks Rank, float TotalTimeSeconds)
 	{
@@ -94,13 +92,4 @@ public class PlayerScoreManager : MonoBehaviour
 	{
 		OnPlayerRankUp?.Invoke();
 	}
-	public static Sprite GetRankSprite(Ranks currentRank) => currentRank switch
-	{
-		Ranks.S => Instance.rankS,
-		Ranks.A => Instance.rankA,
-		Ranks.B => Instance.rankB,
-		Ranks.C => Instance.rankC,
-		Ranks.D => Instance.rankD,
-		_ => Instance.rankD,
-	};
 }

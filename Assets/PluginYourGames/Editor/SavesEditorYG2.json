@@ -1,3 +1,23 @@
 {
-    "idSave": 2
+    "idSave": 19,
+    "Levels": [
+        {
+            "BuildIndex": 2,
+            "BestRank": 50,
+            "BestTime": 14.409197807312012,
+            "BestScore": 125
+        },
+        {
+            "BuildIndex": 3,
+            "BestRank": 0,
+            "BestTime": 21.094154357910158,
+            "BestScore": 64
+        },
+        {
+            "BuildIndex": 4,
+            "BestRank": 50,
+            "BestTime": 12.225292205810547,
+            "BestScore": 129
+        }
+    ]
 }

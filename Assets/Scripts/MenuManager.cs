@@ -44,13 +44,13 @@ public class MenuManager : MonoBehaviour
 
 		winUi.SetActive(true);
 		var score = GetComponent<PlayerScoreManager>();
-		levelCompletedRank.sprite = PlayerScoreManager.GetRankSprite(score.CurrentRank);
+		levelCompletedRank.sprite = RanksSprites.GetRankSprite(score.CurrentRank);
 
 		LevelRanksManager.NewScore(new Level()
 		{
 			BuildIndex = LevelRanksManager.CurrentLevel,
 			BestRank = score.CurrentRank,
-			BestTime = System.TimeSpan.FromSeconds(Ui.TimeTotal),
+			BestTime = Ui.TimeTotal,
 			BestScore = PlayerScoreManager.Instance.EvaluateScore(score.CurrentRank, Ui.TimeTotal)
 		});
 	}
