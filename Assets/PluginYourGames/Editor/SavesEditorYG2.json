@@ -1,23 +1,65 @@
 {
-    "idSave": 19,
+    "idSave": 59,
     "Levels": [
         {
             "BuildIndex": 2,
-            "BestRank": 50,
-            "BestTime": 14.409197807312012,
-            "BestScore": 125
+            "BestRank": 75,
+            "BestTime": 17.5578670501709,
+            "BestScore": 145
         },
         {
             "BuildIndex": 3,
-            "BestRank": 0,
-            "BestTime": 21.094154357910158,
-            "BestScore": 64
+            "BestRank": 25,
+            "BestTime": 7.54190731048584,
+            "BestScore": 112
         },
         {
             "BuildIndex": 4,
             "BestRank": 50,
             "BestTime": 12.225292205810547,
             "BestScore": 129
+        },
+        {
+            "BuildIndex": 5,
+            "BestRank": 0,
+            "BestTime": 18.936813354492189,
+            "BestScore": 68
+        },
+        {
+            "BuildIndex": 6,
+            "BestRank": 0,
+            "BestTime": 11.568183898925782,
+            "BestScore": 80
+        },
+        {
+            "BuildIndex": 7,
+            "BestRank": 25,
+            "BestTime": 9.117767333984375,
+            "BestScore": 109
+        },
+        {
+            "BuildIndex": 8,
+            "BestRank": 0,
+            "BestTime": 16.273193359375,
+            "BestScore": 72
+        },
+        {
+            "BuildIndex": 9,
+            "BestRank": 25,
+            "BestTime": 13.137298583984375,
+            "BestScore": 103
+        },
+        {
+            "BuildIndex": 10,
+            "BestRank": 0,
+            "BestTime": 15.911666870117188,
+            "BestScore": 73
+        },
+        {
+            "BuildIndex": 11,
+            "BestRank": 0,
+            "BestTime": 31.017684936523439,
+            "BestScore": 48
         }
     ]
 }

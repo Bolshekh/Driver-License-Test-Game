@@ -68,8 +68,8 @@ public class MenuManager : MonoBehaviour
 	public void ReloadCurrentScene()
 	{
 		CloseMenu();
-		SceneManager.LoadSceneAsync(1);
-		SceneManager.LoadSceneAsync(LevelRanksManager.CurrentLevel, LoadSceneMode.Additive);
+		SceneManager.LoadScene(1);
+		SceneManager.LoadScene(LevelRanksManager.CurrentLevel, LoadSceneMode.Additive);//.completed += (s) => CloseMenu();
 	}
 	public void LoadNextScene()
 	{
@@ -86,8 +86,8 @@ public class MenuManager : MonoBehaviour
 	public void LoadScene(int SceneIndex)
 	{
 		CloseMenu();
-		SceneManager.LoadSceneAsync(1);
-		SceneManager.LoadSceneAsync(SceneIndex, LoadSceneMode.Additive);
+		SceneManager.LoadScene(1);
+		SceneManager.LoadScene(SceneIndex, LoadSceneMode.Additive);
 		LevelRanksManager.CurrentLevel = SceneIndex;
 	}
 	public void LoadScene(string SceneName)

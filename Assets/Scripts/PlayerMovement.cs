@@ -68,9 +68,6 @@ public class PlayerMovement : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		var _hor = Mathf.Clamp(Input.GetAxis("Horizontal") + uiInput, -1, 1);
-
-		MovementAndRotation(_hor);
 
 		var _angle = Mathf.Abs(Vector2.SignedAngle(transform.up, (Vector3)playerRigidBody.velocity));
 
@@ -84,6 +81,13 @@ public class PlayerMovement : MonoBehaviour
 		ChangeAudioVolume(isDrifting);
 
 		DebugRays();
+	}
+	private void FixedUpdate()
+	{
+		var _hor = Mathf.Clamp(Input.GetAxis("Horizontal") + uiInput, -1, 1);
+
+		MovementAndRotation(_hor);
+
 	}
 	public void AddUiInput(float Axis)
 	{
